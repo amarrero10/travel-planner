@@ -65,7 +65,6 @@ __sapper__/
 
 # Gatsby files
 .cache/
-public/
 
 # Netlify build directory
 .netlify/
