@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import * as sessionActions from "../store/session";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
 
 function LoginFormPage() {
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  const [credential, setCredential] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  if (sessionUser) return <Redirect to="/" />;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors({});
+    return dispatch(sessionActions.login({ credential, password })).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -16,18 +36,16 @@ function LoginFormPage() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
+                Email address or Username
               </label>
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
+                  value={credential}
+                  onChange={(e) => setCredential(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -45,6 +63,8 @@ function LoginFormPage() {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -67,14 +87,18 @@ function LoginFormPage() {
                 Demo Login
               </button>
             </div>
+            {errors.credential && <p>{errors.credential}</p>}
           </form>
         </div>
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}
-          <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+          <Link
+            to="/signup"
+            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >
             Register now!
-          </a>
+          </Link>
         </p>
       </div>
     </div>
