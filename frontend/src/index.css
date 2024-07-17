@@ -6,4 +6,8 @@
 body {
   background-color: #f6f0ed;
   color: #28536b;
+  background-image: url("../src/assets/destination.svg");
+  background-repeat: no-repeat; /* optional */
+  background-size: cover; /* optional */
+  background-position: center; /* optional */
 }
