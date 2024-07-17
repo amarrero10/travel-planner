@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -34,12 +35,8 @@ function LoginFormPage() {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img
-          alt="Your Company"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          className="mx-auto h-10 w-auto"
-        />
-        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <img alt="Your Company" src={logo} className="mx-auto h-10 xl:h-20 w-auto" />
+        <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-steelblue">
           Sign in to your account
         </h2>
       </div>
@@ -48,7 +45,7 @@ function LoginFormPage() {
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-steelblue">
                 Email address or Username
               </label>
               <div className="mt-2">
@@ -56,7 +53,7 @@ function LoginFormPage() {
                   id="email"
                   value={credential}
                   onChange={(e) => setCredential(e.target.value)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-steelblue shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-steelblue sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -64,7 +61,7 @@ function LoginFormPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-steelblue"
               >
                 Password
               </label>
@@ -77,14 +74,14 @@ function LoginFormPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-steelblue shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-steelblue sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-skyblue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-steelblue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-steelblue"
               >
                 Sign in
               </button>
@@ -92,7 +89,7 @@ function LoginFormPage() {
             <div>
               <button
                 onClick={handleDemoLogin}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-skyblue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-steelblue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-steelblue"
               >
                 Demo Login
               </button>
@@ -103,10 +100,7 @@ function LoginFormPage() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}
-          <Link
-            to="/signup"
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-          >
+          <Link to="/signup" className="font-semibold leading-6 text-rose hover:text-indigo-500">
             Register now!
           </Link>
         </p>

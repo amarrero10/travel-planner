@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "./../store/session";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { ReactComponent as Signup } from "../assets/signup.svg";
+import { ReactComponent as World } from "../assets/world.svg";
 
 function SignUpFormPage() {
   const dispatch = useDispatch();
@@ -44,20 +46,17 @@ function SignUpFormPage() {
   return (
     <div className="h-[100vh] items-center flex justify-center px-5 lg:px-0">
       <div className="max-w-screen-xl bg-white border shadow sm:rounded-lg flex justify-center flex-1">
-        <div className="flex-1 bg-blue-900 text-center hidden md:flex">
-          <div
-            className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(https://www.tailwindtap.com/assets/common/marketing.svg)`,
-            }}
-          ></div>
+        <div className="flex-1 bg-sage text-center hidden md:flex">
+          <div className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat ">
+            <World />
+          </div>
         </div>
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
           <div className="flex flex-col items-center">
             <div className="text-center">
-              <h1 className="text-2xl xl:text-4xl font-extrabold text-blue-900">Student Sign up</h1>
-              <p className="text-[12px] text-gray-500">
-                Hey enter your details to create your account
+              <h1 className="text-2xl xl:text-4xl font-extrabold text-steelblue">Sign up!</h1>
+              <p className="text-[12px] text-rose">
+                Hey! Enter your details to create your account and start making memories.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="w-full flex-1 mt-8">
@@ -117,7 +116,7 @@ function SignUpFormPage() {
                 />
                 {errors.confirmPassword && <p className="text-red-500">{errors.confirmPassword}</p>}
                 <button
-                  className="mt-5 tracking-wide font-semibold bg-blue-900 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+                  className="mt-5 tracking-wide font-semibold bg-rose text-gray-100 w-full py-4 rounded-lg hover:bg-[#c94d3a] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
                   type="submit"
                 >
                   <svg
@@ -138,7 +137,7 @@ function SignUpFormPage() {
                 <p className="mt-6 text-xs text-gray-600 text-center">
                   Already have an account?{" "}
                   <Link to="/login">
-                    <span className="text-blue-900 font-semibold">Sign in</span>
+                    <span className="text-steelblue font-semibold">Sign in</span>
                   </Link>
                 </p>
               </div>

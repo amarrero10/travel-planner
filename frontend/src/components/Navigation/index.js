@@ -1,6 +1,6 @@
 import React from "react";
 import * as sessionActions from "../../store/session";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   Disclosure,
@@ -12,28 +12,26 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import logo from "../../assets/logo.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
+    dispatch(sessionActions.logout()).then(() => history.push("/login"));
   };
 
   return (
-    <Disclosure as="nav" className="bg-white shadow">
+    <Disclosure as="nav" className="bg-almond shadow">
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div className="flex h-16 justify-between">
           <div className="flex px-2 lg:px-0">
-            <div className="flex flex-shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
-            </div>
+            <NavLink to="/" className="flex flex-shrink-0 items-center">
+              <img alt="Your Company" src={logo} className="h-8 w-auto" />
+            </NavLink>
 
             {sessionUser && (
               <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
@@ -69,27 +67,18 @@ function Navigation({ isLoaded }) {
           <div className="flex items-center lg:hidden">
             {/* Mobile menu button */}
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="block h-6 w-6 group-data-[open]:hidden" />
               <XMarkIcon aria-hidden="true" className="hidden h-6 w-6 group-data-[open]:block" />
             </DisclosureButton>
           </div>
           <div className="hidden lg:ml-4 lg:flex lg:items-center">
-            <button
-              type="button"
-              className="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-            </button>
-
             {/* Profile dropdown */}
 
             {sessionUser && (
               <Menu as="div" className="relative ml-4 flex-shrink-0">
                 <div>
-                  <MenuButton className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                  <MenuButton className="relative flex rounded-full bg-almond text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <UserCircleIcon className="h-8 w-8 rounded-full" />
@@ -97,7 +86,7 @@ function Navigation({ isLoaded }) {
                 </div>
                 <MenuItems
                   transition
-                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-almond py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                 >
                   <MenuItem>
                     <a
@@ -136,7 +125,7 @@ function Navigation({ isLoaded }) {
                 </NavLink>
                 <NavLink
                   to="/signup"
-                  className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                  className="ml-8 inline-flex items-center justify-center rounded-md border border-transparent bg-rose px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-[#c94d3a]"
                 >
                   Sign up
                 </NavLink>
@@ -192,13 +181,6 @@ function Navigation({ isLoaded }) {
                 </div>
                 <div className="text-sm font-medium text-gray-500">{sessionUser.email}</div>
               </div>
-              <button
-                type="button"
-                className="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <span className="absolute -inset-1.5" />
-                <span className="sr-only">View notifications</span>
-              </button>
             </div>
             <div className="mt-3 space-y-1">
               <DisclosureButton
